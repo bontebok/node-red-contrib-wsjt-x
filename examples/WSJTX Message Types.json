@@ -1,0 +1,330 @@
+[
+    {
+        "id": "9270f17dccdafa84",
+        "type": "tab",
+        "label": "WSJT-X Message Types",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d251a31302a470f8",
+        "type": "udp in",
+        "z": "9270f17dccdafa84",
+        "name": "",
+        "iface": "",
+        "port": "2237",
+        "ipv": "udp4",
+        "multicast": "true",
+        "group": "239.255.0.1",
+        "datatype": "buffer",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "5ac45e60edfec6fc"
+            ]
+        ]
+    },
+    {
+        "id": "3f0f0aeb71391c47",
+        "type": "switch",
+        "z": "9270f17dccdafa84",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "/heartbeat",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/status",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/decode",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/clear",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/qso-logged",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/close",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/wspr-decode",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/logged-adif",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 9,
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "84a06d9cb80de237"
+            ],
+            [
+                "bdb06dc8490faf33"
+            ],
+            [
+                "afc5f26000af2b46"
+            ],
+            [
+                "ada66d726664ca24"
+            ],
+            [
+                "125229f460449a01"
+            ],
+            [
+                "e3e3d15e26983f66"
+            ],
+            [
+                "4044e4a428b51e8e"
+            ],
+            [
+                "4ac5b060fbeb1c5c"
+            ],
+            [
+                "b351f2adcc021976"
+            ]
+        ]
+    },
+    {
+        "id": "5ac45e60edfec6fc",
+        "type": "wsjt-x-decode",
+        "z": "9270f17dccdafa84",
+        "name": "",
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "c4758013f8e496a5"
+            ]
+        ]
+    },
+    {
+        "id": "84a06d9cb80de237",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "heartbeat",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c4758013f8e496a5",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "Save Counts",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nflow.set(msg_type, ++count);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "3f0f0aeb71391c47"
+            ]
+        ]
+    },
+    {
+        "id": "afc5f26000af2b46",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "decode",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ada66d726664ca24",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "clear",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bdb06dc8490faf33",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "status",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "125229f460449a01",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "qso-logged",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e3e3d15e26983f66",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "close",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4044e4a428b51e8e",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "wspr-decode",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ac5b060fbeb1c5c",
+        "type": "function",
+        "z": "9270f17dccdafa84",
+        "name": "logged-adif",
+        "func": "const [wsjtx_id, msg_type] = msg.topic.split('/');\nlet count = flow.get(msg_type) || 0;\nnode.status({fill:'green', shape:'dot', text: `${msg_type}=${count}`});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b9cdb314b637b42f",
+        "type": "comment",
+        "z": "9270f17dccdafa84",
+        "name": "Show count of each message type",
+        "info": "",
+        "x": 640,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b351f2adcc021976",
+        "type": "debug",
+        "z": "9270f17dccdafa84",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8d228e63cfe5dbf3",
+        "type": "comment",
+        "z": "9270f17dccdafa84",
+        "name": "Decode incoming WSJT-X",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "12eb3334ba6fb070",
+        "type": "comment",
+        "z": "9270f17dccdafa84",
+        "name": "Save counts of each type",
+        "info": "",
+        "x": 150,
+        "y": 240,
+        "wires": []
+    }
+]

@@ -1,0 +1,50 @@
+{
+	"name": "node-red-contrib-wsjt-x",
+	"version": "2.0.1",
+	"description": "WSJT-X Data Decoding",
+	"keywords": [
+		"node-red",
+		"wsjt-x",
+		"wsjtx",
+		"ft8",
+		"ft4",
+		"wspr",
+		"radio",
+		"ham radio",
+		"amatuer radio"
+	],
+	"author": "Stephen Houser, N1SH <stephenhouser@gmail.com>",
+	"repository": "github:stephenhouser/node-red-contrib-wsjt-x",
+	"license": "MIT",
+	"homepage": "https://github.com/stephenhouser/node-red-contrib-wsjt-x",
+	"bugs": {
+		"url": "https://github.com/stephenhouser/node-red-contrib-wsjt-x/issues"
+	},
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "npx eslint --fix . || exit 0"
+	},
+	"engines": {
+		"node": ">=10"
+	},
+	"dependencies": {
+		"binary-parser": "^2.2.1",
+		"binary-parser-encoder": "^1.5.3"
+	},
+	"devDependencies": {
+		"eslint": "^7.32.0",
+		"eslint-config-standard": "^16.0.3",
+		"eslint-plugin-import": "^2.24.2",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-promise": "^5.1.0",
+		"pcap": "^3.1.0"
+	},
+	"node-red": {
+		"version": ">=2.0.0",
+		"nodes": {
+			"wsjt-x-decode": "wsjt-x-decode.js",
+			"wsjt-x-encode": "wsjt-x-encode.js"
+		}
+	}
+}
